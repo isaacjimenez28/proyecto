@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+	
+	<title>CrudHotel</title>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
+          <span class="align-middle">Hotel</span>
+        </a>
+		
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Paginas
+					</li>
+
+					<li class="sidebar-item active">
+						<a class="sidebar-link" href="{{ url_for('profile') }}">
+
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-profile">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
+            </a>
+					</li>
+					
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{{ url_for('sign') }}">
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+            </a>
+					</li>
+
+		
+				
+			</div>
+		</nav>
+
+		<div class="main">
+			
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					
+          <i class="hamburger align-self-center"></i>
+        </a>
+		
+				<!-- Botón para abrir el modal -->
+				 
+				<div class="d-flex justify-content-end w-100">
+					<button id="openModalBtn" class="btn btn-outline-primary">Registrar</button>
+				</div>
+					</nav>
+		
+		
+			
+			<div id="myModal" class="modal" style="display:none;">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<h2>Reserva</h2>
+			   
+					
+					<form>
+						<div class="mb-3">
+							<label for="nombre" class="form-label">Nombre</label>
+							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
+						</div>
+						<div class="mb-3">
+							<label for="reservacion" class="form-label">Reservación</label>
+							<input type="text" class="form-control" id="reservacion" name="reservacion" placeholder="Ingresa tu reservación">
+						</div>
+						<div class="mb-3">
+							<label for="costo" class="form-label">Costo</label>
+							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
+						</div>
+						<div class="mb-3">
+							<label for="dia" class="form-label">Día</label>
+							<input type="date" class="form-control" id="dia" name="dia">
+						</div>
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</form>
+				</div>
+			</div>				
+		</body>		
+		</html>				
+			</nav>
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3"><strong>Lista</strong> reservacion</h1>
+
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="card">
+											
+										</div>
+									
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
+					</div>
+					<div class="row">
+						
+						
+						</div>
+						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+							<div class="card flex-fill">
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Reservaciones</h5>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-hover my-0">
+										<thead>
+											<tr>
+												<th scope="col">Nombre</th>
+												<th scope="col">Reservacion</th>
+												<th scope="col">Costo</th>
+												<th scope="col">Dia</th>
+												<th scope="col">Acciones</th>
+											  </tr>
+											</thead>
+											<tbody>
+											  <tr>
+												<th scope="row">Mark</th>
+												<td>Cabaña1</td>
+												<td>$400</td>
+												<td>12/11/2025</td>
+												<td>
+													<button type="button" class="btn btn-outline-warning">Editar</button>
+													<button type="button" class="btn btn-outline-danger">Borrar</button>
+												  </td>
+											  </tr>
+											  <tr>
+												<th scope="row">Jacob</th>
+												<td>Blacon</td>
+												<td>$390</td>
+												<td>9/10/2025</td>
+												<td>
+													<button type="button" class="btn btn-outline-warning">Editar</button>
+													<button type="button" class="btn btn-outline-danger">Borrar</button>
+												  </td>
+											  </tr>
+											  <tr>
+												<th scope="row">Isaac</th>
+												<td>Cabaña2</td>
+												<td>$600</td>
+												<td>29/7/2024</td>
+												<td>
+													<button type="button" class="btn btn-outline-warning">Editar</button>
+													<button type="button" class="btn btn-outline-danger">Borrar</button>
+												  </td>
+											  </tr>
+											  <tr>
+												<th scope="row">Danna</th>
+												<td>Cabaña3</td>
+												<td>$500</td>
+												<td>8/7/2024</td>
+												<td>
+													<button type="button" class="btn btn-outline-warning">Editar</button>
+													<button type="button" class="btn btn-outline-danger">Borrar</button>
+												  </td>
+											  </tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+			</main>
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
+							</p>
+						</div>
+						<div class="col-6 text-end">
+							
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	
+		
+	</div>
+	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+	
+		
+</body>
+</html>

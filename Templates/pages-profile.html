@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	
+	<title>CrudHotel</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
+          <span class="align-middle">Hotel</span>
+        </a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Paginas
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-brand" href="{{ url_for('inicio') }}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item active">
+						<a class="sidebar-link" href="{{ url_for('profile') }}">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
+            </a>
+					</li>
+				</li>
+				
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="{{ url_for('sign') }}">
+		  <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+		</a>
+				</li>
+
+
+
+
+				
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							
+							
+						<li class="nav-item dropdown">
+							
+							
+						</li>
+						
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="mb-3">
+						<h1 class="h3 d-inline align-middle">Perfiles</h1>
+						
+					
+				</div>
+			</main>
+
+			
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="row text-muted">
+				<div class="col-6 text-start">
+					<p class="mb-0">
+						<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
+					</p>
+				</div>
+				<div class="col-6 text-end">
+					
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>
