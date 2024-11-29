@@ -48,17 +48,18 @@
 					<a class="sidebar-link" href="{{ url_for('costo') }}">
 		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
 		</a>
+				</li>
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="{{ url_for('cliente') }}">
+		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
+		</a>
 				</li>	
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('sign') }}">
               <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
             </a>
 					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-brand" href="{{ url_for('cliente') }}">
-			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Clientes</span>
-			</a>
-					</li>
+					
 		
 				
 			</div>
@@ -74,9 +75,7 @@
 		
 				<!-- Botón para abrir el modal -->
 				 
-				<div class="d-flex justify-content-end w-100">
-					<button id="openModalBtn" class="btn btn-outline-primary">Registrar</button>
-				</div>
+				
 					</nav>
 		
 		
@@ -111,11 +110,15 @@
 		</body>		
 		</html>				
 			</nav>
+			
 			<main class="content">
+				
 				<div class="container-fluid p-0">
-
+					<div class="d-flex justify-content-end w-100">
+						<button id="openModalBtn" class="btn btn-outline-primary">Registrar</button>
+					</div> 
 					<h1 class="h3 mb-3"><strong>Lista</strong> reservacion</h1>
-
+					     
 					<div class="row">
 						<div class="col-xl-6 col-xxl-5 d-flex">
 							<div class="w-100">
@@ -142,70 +145,73 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-							<div class="card flex-fill">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Reservaciones</h5>
-								</div>
-								<div class="table-responsive">
-									<table class="table table-hover my-0">
-										<thead>
-											<tr>
-												<th scope="col">Nombre</th>
-												<th scope="col">Reservacion</th>
-												<th scope="col">Costo</th>
-												<th scope="col">Dia</th>
-												<th scope="col">Acciones</th>
-											  </tr>
-											</thead>
-											<tbody>
-											  <tr>
-												<th scope="row">Mark</th>
-												<td>Cabaña1</td>
-												<td>$400</td>
-												<td>12/11/2025</td>
-												<td>
-													<button type="button" class="btn btn-outline-warning">Editar</button>
-													<button type="button" class="btn btn-outline-danger">Borrar</button>
-												  </td>
-											  </tr>
-											  <tr>
-												<th scope="row">Jacob</th>
-												<td>Blacon</td>
-												<td>$390</td>
-												<td>9/10/2025</td>
-												<td>
-													<button type="button" class="btn btn-outline-warning">Editar</button>
-													<button type="button" class="btn btn-outline-danger">Borrar</button>
-												  </td>
-											  </tr>
-											  <tr>
-												<th scope="row">Isaac</th>
-												<td>Cabaña2</td>
-												<td>$600</td>
-												<td>29/7/2024</td>
-												<td>
-													<button type="button" class="btn btn-outline-warning">Editar</button>
-													<button type="button" class="btn btn-outline-danger">Borrar</button>
-												  </td>
-											  </tr>
-											  <tr>
-												<th scope="row">Danna</th>
-												<td>Cabaña3</td>
-												<td>$500</td>
-												<td>8/7/2024</td>
-												<td>
-													<button type="button" class="btn btn-outline-warning">Editar</button>
-													<button type="button" class="btn btn-outline-danger">Borrar</button>
-												  </td>
-											  </tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
+					
+						
+							
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Reservaciones</h5>
 						</div>
-					</div>
+									<div class="card-body">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th >Nombre</th>
+													<th>Reservacion</th>
+													<th >Costo</th>
+													<th >Dia</th>
+													<th >Acciones</th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+													<th >Mark</th>
+													<td>Cabaña1</td>
+													<td>$400</td>
+													<td>12/11/2025</td>
+													<td>
+														<button type="button" class="btn btn-outline-warning">Editar</button>
+														<button type="button" class="btn btn-outline-danger">Borrar</button>
+													  </td>
+												  </tr>
+												  <tr>
+													<th >Jacob</th>
+													<td>Blacon</td>
+													<td>$390</td>
+													<td>9/10/2025</td>
+													<td>
+														<button type="button" class="btn btn-outline-warning">Editar</button>
+														<button type="button" class="btn btn-outline-danger">Borrar</button>
+													  </td>
+												  </tr>
+												  <tr>
+													<th >Isaac</th>
+													<td>Cabaña2</td>
+													<td>$600</td>
+													<td>29/7/2024</td>
+													<td>
+														<button type="button" class="btn btn-outline-warning">Editar</button>
+														<button type="button" class="btn btn-outline-danger">Borrar</button>
+													  </td>
+												  </tr>
+												  <tr>
+													<th>Danna</th>
+													<td>Cabaña3</td>
+													<td>$500</td>
+													<td>8/7/2024</td>
+													<td>
+														<button type="button" class="btn btn-outline-warning">Editar</button>
+														<button type="button" class="btn btn-outline-danger">Borrar</button>
+													  </td>
+												  </tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+							
+						
+					
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 						  <li class="page-item">

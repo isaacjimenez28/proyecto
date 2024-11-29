@@ -33,7 +33,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-brand" href="{{ url_for('inicio') }}">
+						<a class="sidebar-link" href="{{ url_for('inicio') }}">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
             </a>
 					</li>
@@ -49,17 +49,21 @@
 				<a class="sidebar-link" href="{{ url_for('costo') }}">
 	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
 	</a>
+	</li>
+				<li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ url_for('cliente') }}">
+          <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Clientes</span>
+        </a>
+                </li>
+           
+
 			</li>
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="{{ url_for('sign') }}">
 		  <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
 		</a>
 				</li>
-				<li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ url_for('cliente') }}">
-          <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Clientes</span>
-        </a>
-                </li>
+				
 
 
 
@@ -77,9 +81,7 @@
 					<h1></h1>
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
-							<div class="d-flex justify-content-end w-100">
-								<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Usuario</button>
-							</div>
+							
 							
 						<li class="nav-item dropdown">
 							
@@ -91,10 +93,13 @@
 			</nav>
 
 			<main class="content">
+				
 				<div class="container-fluid p-0">
 					<div class="mb-3 d-flex justify-content-between align-items-center">
 						<h1 class="h3">Perfiles</h1>
-						
+						<div class="d-flex justify-content-end w-100">
+							<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Usuario</button>
+						</div>	
 				 
 				
 					</nav>
