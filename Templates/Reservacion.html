@@ -31,13 +31,13 @@
 						Paginas
 					</li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item ">
 						<a class="sidebar-link" href="{{ url_for('profile') }}">
 
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
             </a>
 					</li>
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="{{ url_for('reservacion') }}">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Reservaciones</span>
             </a>
@@ -67,6 +67,7 @@
 		
 				<!-- Botón para abrir el modal -->
 				 
+				 
 				<div class="d-flex justify-content-end w-100">
 					<button id="openModalBtn" class="btn btn-outline-primary">Registrar</button>
 				</div>
@@ -82,20 +83,16 @@
 					
 					<form>
 						<div class="mb-3">
-							<label for="nombre" class="form-label">Nombre</label>
+							<label for="nombre" class="form-label">Fecha de entrada</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
 						</div>
 						<div class="mb-3">
-							<label for="reservacion" class="form-label">Reservación</label>
+							<label for="reservacion" class="form-label">Fecha de salida</label>
 							<input type="text" class="form-control" id="reservacion" name="reservacion" placeholder="Ingresa tu reservación">
 						</div>
 						<div class="mb-3">
-							<label for="costo" class="form-label">Costo</label>
+							<label for="costo" class="form-label">ID_ Costo</label>
 							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
-						<div class="mb-3">
-							<label for="dia" class="form-label">Día</label>
-							<input type="date" class="form-control" id="dia" name="dia">
 						</div>
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
@@ -107,7 +104,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>HOTEL</strong> INICIO</h1>
+					<h1 class="h3 mb-3"><strong>Lista</strong> Reservaciones</h1>
 
 					<div class="row">
 						<div class="col-xl-6 col-xxl-5 d-flex">
@@ -145,11 +142,9 @@
 									<table class="table table-hover my-0">
 										<thead>
 											<tr>
-												<th scope="col">Nombre</th>
-												<th scope="col">Reservacion</th>
-												<th scope="col">Costo</th>
-												<th scope="col">Dia</th>
-												<th scope="col">Acciones</th>
+												<th scope="col">Fecha de entrada</th>
+												<th scope="col">Fecha de salida</th>
+												<th scope="col">ID_Costo</th>
 											  </tr>
 											</thead>
 											<tbody>
@@ -157,7 +152,6 @@
 												<th scope="row">Mark</th>
 												<td>Cabaña1</td>
 												<td>$400</td>
-												<td>12/11/2025</td>
 												<td>
 													<button type="button" class="btn btn-outline-warning">Editar</button>
 													<button type="button" class="btn btn-outline-danger">Borrar</button>
@@ -167,27 +161,6 @@
 												<th scope="row">Jacob</th>
 												<td>Blacon</td>
 												<td>$390</td>
-												<td>9/10/2025</td>
-												<td>
-													<button type="button" class="btn btn-outline-warning">Editar</button>
-													<button type="button" class="btn btn-outline-danger">Borrar</button>
-												  </td>
-											  </tr>
-											  <tr>
-												<th scope="row">Isaac</th>
-												<td>Cabaña2</td>
-												<td>$600</td>
-												<td>29/7/2024</td>
-												<td>
-													<button type="button" class="btn btn-outline-warning">Editar</button>
-													<button type="button" class="btn btn-outline-danger">Borrar</button>
-												  </td>
-											  </tr>
-											  <tr>
-												<th scope="row">Danna</th>
-												<td>Cabaña3</td>
-												<td>$500</td>
-												<td>8/7/2024</td>
 												<td>
 													<button type="button" class="btn btn-outline-warning">Editar</button>
 													<button type="button" class="btn btn-outline-danger">Borrar</button>

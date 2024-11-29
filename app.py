@@ -14,5 +14,9 @@ def profile():
 def sign():
     return render_template('pages-sign-in.html')
 
+@app.route('/Reservacion')
+def reservacion():
+    return render_template('Reservacion.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
