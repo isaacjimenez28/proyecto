@@ -32,7 +32,7 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="{{ url_for('profile') }}">
+						<a class="sidebar-link" href="{{ url_for('inicio') }}">
 
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
             </a>
@@ -48,12 +48,26 @@
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
             </a>
 					</li>
-					
+				</li>
+				<li class="sidebar-item ">
+					<a class="sidebar-link" href="{{ url_for('costo') }}">
+		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+		</a>
+				</li>	
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="{{ url_for('cliente') }}">
+		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
+		</a>
+				</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('sign') }}">
               <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
             </a>
+
 					</li>	
+					</li>
+					
+		
 			</div>
 		</nav>
 

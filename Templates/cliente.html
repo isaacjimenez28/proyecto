@@ -27,46 +27,47 @@
           <span class="align-middle">Hotel</span>
         </a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Paginas
-					</li>
+		<ul class="sidebar-nav">
+			<li class="sidebar-header">
+				Paginas
+			</li>					
+			<li class="sidebar-item ">
+				<a class="sidebar-link" href="{{ url_for('inicio') }}">
 
-					<li class="sidebar-item ">
-						<a class="sidebar-link" href="{{ url_for('inicio') }}">
-
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
-            </a>
-					</li>
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+	</a>
+			</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('reservacion') }}">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Reservaciones</span>
             </a>
 					</li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item ">
 						<a class="sidebar-link" href="{{ url_for('profile') }}">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
             </a>
 					</li>
+                    <li class="sidebar-item ">
+						<a class="sidebar-link" href="{{ url_for('costo') }}">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+            </a>
+					</li>
 				</li>
-			</li>
-			<li class="sidebar-item ">
-				<a class="sidebar-link" href="{{ url_for('costo') }}">
-	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-	</a>
-			</li>
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="{{ url_for('cliente') }}">
-	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
-	</a>
-			</li>
+				<li class="sidebar-item active">
+					<a class="sidebar-link" href="{{ url_for('cliente') }}">
+		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
+		</a>
+				</li>
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="{{ url_for('sign') }}">
 		  <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
 		</a>
 				</li>
-				
+
+
+
+
 				
 			</div>
 		</nav>
@@ -82,7 +83,7 @@
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
 							<div class="d-flex justify-content-end w-100">
-								<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Usuario</button>
+								<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Cliente</button>
 							</div>
 							
 						<li class="nav-item dropdown">
@@ -97,7 +98,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="mb-3 d-flex justify-content-between align-items-center">
-						<h1 class="h3">Perfiles</h1>
+						<h1 class="h3">Cliente</h1>
 						
 				 
 				
@@ -108,7 +109,7 @@
 			<div id="myModal" class="modal" style="display:none;">
 				<div class="modal-content">
 					<span class="close">&times;</span>
-					<h2>Reserva</h2>
+					<h2>Cliente</h2>
 			   
 					
 					<form>
@@ -121,13 +122,10 @@
 							<input type="text" class="form-control" id="reservacion" name="reservacion" placeholder="Ingresa tu reservación">
 						</div>
 						<div class="mb-3">
-							<label for="costo" class="form-label">Rol</label>
+							<label for="costo" class="form-label">Numero de telefono</label>
 							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
 						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">contraseña</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
+						
 						</div>
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
@@ -146,8 +144,7 @@
 										<th>#</th>
 										<th>Nombre</th>
 										<th>Correo Electrónico</th>
-										<th>Rol</th>
-										<th>Contraseña</th>
+										<th>Numero de telefono</th>
 										<th>Acciones</th>
 
 									</tr>
@@ -157,7 +154,7 @@
 										<td>1</td>
 										<td>isaac jimenex</td>
 										<td>isaacjimenez@gmail.com.com</td>
-										<td>Administrador</td>
+										
 										<td>**********</td>
 										<td>
 											<button class="btn btn-sm btn-warning">Editar</button>
@@ -168,7 +165,7 @@
 										<td>2</td>
 										<td>Ana Gómez</td>
 										<td>ana.gomez@example.com</td>
-										<td>Usuario</td>
+										
 										<td>**********</td>
 										<td>
 											<button class="btn btn-sm btn-warning">Editar</button>
@@ -179,7 +176,7 @@
 										<td>3</td>
 										<td>Danna rosas campos</td>
 										<td>dannarosas@gmail.com</td>
-										<td>Recepcionista</td>
+										
 										<td>**********</td>
 										<td>
 											<button class="btn btn-sm btn-warning">Editar</button>

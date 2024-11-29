@@ -30,8 +30,7 @@
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
 						Paginas
-					</li>
-
+					</li>					
 					<li class="sidebar-item ">
 						<a class="sidebar-link" href="{{ url_for('inicio') }}">
 
@@ -43,19 +42,18 @@
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Reservaciones</span>
             </a>
 					</li>
-
-					<li class="sidebar-item active">
+					<li class="sidebar-item ">
 						<a class="sidebar-link" href="{{ url_for('profile') }}">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
             </a>
 					</li>
 				</li>
 			</li>
-			<li class="sidebar-item ">
-				<a class="sidebar-link" href="{{ url_for('costo') }}">
-	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-	</a>
-			</li>
+            <li class="sidebar-item active">
+                <a class="sidebar-link" href="{{ url_for('costo') }}">
+      <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+    </a>
+            </li>
 			<li class="sidebar-item">
 				<a class="sidebar-link" href="{{ url_for('cliente') }}">
 	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
@@ -67,6 +65,9 @@
 		</a>
 				</li>
 				
+
+
+
 				
 			</div>
 		</nav>
@@ -82,7 +83,7 @@
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
 							<div class="d-flex justify-content-end w-100">
-								<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Usuario</button>
+								<button id="openModalBtn" class="btn btn-outline-primary">Nuevo costo</button>
 							</div>
 							
 						<li class="nav-item dropdown">
@@ -108,26 +109,19 @@
 			<div id="myModal" class="modal" style="display:none;">
 				<div class="modal-content">
 					<span class="close">&times;</span>
-					<h2>Reserva</h2>
+					<h2>Costo</h2>
 			   
 					
 					<form>
 						<div class="mb-3">
-							<label for="nombre" class="form-label">Nombre</label>
+							<label for="nombre" class="form-label">Precio</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
 						</div>
 						<div class="mb-3">
-							<label for="reservacion" class="form-label">Correo Electronico</label>
+							<label for="reservacion" class="form-label">Tipo de habitacion</label>
 							<input type="text" class="form-control" id="reservacion" name="reservacion" placeholder="Ingresa tu reservación">
 						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">Rol</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">contraseña</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
+						
 						</div>
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
@@ -137,7 +131,7 @@
 			
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title mb-0">Listado de Perfiles</h5>
+							<h5 class="card-title mb-0">Listado de costos</h5>
 						</div>
 						<div class="card-body">
 							<table class="table table-striped">
