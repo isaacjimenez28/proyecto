@@ -1,0 +1,34 @@
+
+body {
+	background-image: url('../fondo.jpg'); /* Asegúrate de que la imagen esté en static/img */
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	margin: 0;
+	font-family: 'Inter', sans-serif;
+}
+
+.card {
+	background: rgba(255, 255, 255, 0.85); /* Fondo semitransparente */
+	border-radius: 15px;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h1 {
+	font-weight: 600;
+}
+
+.btn-primary {
+	background-color: #096ad2;
+	border: none;
+	transition: all 0.3s;
+}
+
+.btn-primary:hover {
+	background-color: #2e88e9;
+}
+
+.form-control {
+	border-radius: 10px;
+}
