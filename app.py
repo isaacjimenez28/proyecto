@@ -1,4 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request,redirect,url_for,session,flash
+from flask_sqlalchemy import SQLALchemy
+from config import Config
+from models import db, Usuario, NivelUsuario
+from werkzeug.security import generate_password_hash,check_password_hash
 import pymysql
 
 app = Flask(__name__)
@@ -365,6 +369,25 @@ def eliminar_perfil(id):
         return jsonify({'error': str(e)}), 500
     finally:
         conexion.close()
-
+        
+        
+@app.route('/authenticate',methods=['POST'])
+def authenticate():
+    data=request.json
+    correo =data.get('correo')
+    contrasena= data.get('contrasena')
+    user =Usuario.query.filter_by(correo=correo,estatus=1).first()
+    
+    
+    if user and contrasena:
+        session['usuario']=user.id_usuario
+        return jsonify({'status':'success','message':'Login exitoso'})
+    return jsonify({'status':'error','message':'Credenciales incorrectas'})
+@app.route('/index')
+def dashboard():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    return render_template('index.html')
+    
 if __name__ == '__main__':
     app.run(debug=True)

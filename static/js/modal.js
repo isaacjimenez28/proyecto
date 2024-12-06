@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (response.ok) {
               alert("Costo agregado correctamente");
-              form.reset(); // Limpiar formulario
-              modal.style.display = "none"; // Cerrar modal
-              cargarCostos(); // Recargar lista
+              form.reset(); 
+              modal.style.display = "none"; 
+              cargarCostos(); 
           } else {
               const error = await response.json();
               alert(`Error: ${error.mensaje || "Error al agregar el costo"}`);
