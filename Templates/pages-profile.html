@@ -8,133 +8,85 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	
 	<title>CrudHotel</title>
-
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 	<div class="wrapper">
+		<!-- Sidebar -->
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
-          <span class="align-middle">Hotel</span>
-        </a>
+					<span class="align-middle">Hotel</span>
+				</a>
 
 				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Paginas
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="{{ url_for('inicio') }}">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
-            </a>
-					</li>
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="{{ url_for('profile') }}">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
-            </a>
-					</li>
-				</li>
-			</li>
-			<li class="sidebar-item ">
-				<a class="sidebar-link" href="{{ url_for('costo') }}">
-	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-	</a>
-	</li>
-				<li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ url_for('cliente') }}">
-          <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Clientes</span>
-        </a>
-                </li>
-           
-
-			</li>
-				<li class="sidebar-item">
-					<a class="sidebar-link" href="{{ url_for('sign') }}">
-		  <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-		</a>
-				</li>
-				
-
-
-
-				
+					<li class="sidebar-header">Páginas</li>
+					<li class="sidebar-item"><a class="sidebar-link" href="{{ url_for('inicio') }}"><i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span></a></li>
+					<li class="sidebar-item active"><a class="sidebar-link" href="{{ url_for('profile') }}"><i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span></a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="{{ url_for('costo') }}"><i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span></a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="{{ url_for('cliente') }}"><i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Clientes</span></a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="{{ url_for('sign') }}"><i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span></a></li>
+				</ul>
 			</div>
 		</nav>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<h1></h1>
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							
-							
-						<li class="nav-item dropdown">
-							
-							
-						</li>
-						
-					</ul>
-				</div>
+				<a class="sidebar-toggle js-sidebar-toggle"><i class="hamburger align-self-center"></i></a>
 			</nav>
 
 			<main class="content">
-				
 				<div class="container-fluid p-0">
 					<div class="mb-3 d-flex justify-content-between align-items-center">
 						<h1 class="h3">Perfiles</h1>
 						<div class="d-flex justify-content-end w-100">
-							<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Usuario</button>
-						</div>	
-				 
-				
-					</nav>
-		
-		
-			
-			<div id="myModal" class="modal" style="display:none;">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<h2>Reserva</h2>
-			   
-					
-					<form>
-						<div class="mb-3">
-							<label for="nombre" class="form-label">Nombre</label>
-							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
+							<button id="openModalBtn" class="btn btn-outline-primary">Agregar Nuevo Usuario</button>
 						</div>
-						<div class="mb-3">
-							<label for="reservacion" class="form-label">Correo Electronico</label>
-							<input type="text" class="form-control" id="reservacion" name="reservacion" placeholder="Ingresa tu reservación">
-						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">Rol</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">contraseña</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</form>
-				</div>
-			</div>				
 					</div>
-			
+
+					<!-- Modal -->
+					<!-- Modal para agregar o editar usuario -->
+<div id="myModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Agregar Usuario</h2> <!-- Título dinámico -->
+        <form id="userForm">
+            <input type="hidden" id="userId" /> <!-- Campo oculto para el ID del usuario -->
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa el nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingresa el correo" required>
+            </div>
+            <div class="mb-3">
+                <label for="rol" class="form-label">Rol</label>
+                <select class="form-control" id="rol" name="rol" required>
+                    <option value="">Selecciona un rol</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Cliente">Cliente</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingresa la contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Guardar</button> <!-- Texto del botón dinámico -->
+        </form>
+    </div>
+</div>
+
+
+					<!-- Tabla de Perfiles -->
 					<div class="card">
 						<div class="card-header">
 							<h5 class="card-title mb-0">Listado de Perfiles</h5>
@@ -147,91 +99,211 @@
 										<th>Nombre</th>
 										<th>Correo Electrónico</th>
 										<th>Rol</th>
-										<th>Contraseña</th>
+										
 										<th>Acciones</th>
-
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>isaac jimenex</td>
-										<td>isaacjimenez@gmail.com.com</td>
-										<td>Administrador</td>
-										<td>**********</td>
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Ana Gómez</td>
-										<td>ana.gomez@example.com</td>
-										<td>Usuario</td>
-										<td>**********</td>
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Danna rosas campos</td>
-										<td>dannarosas@gmail.com</td>
-										<td>Recepcionista</td>
-										<td>**********</td>
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
+								<tbody id="profileList">
+									<!-- Los perfiles se cargarán aquí mediante JavaScript -->
 								</tbody>
-								
 							</table>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination">
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Previous">
-									  <span aria-hidden="true">&laquo;</span>
-									</a>
-								  </li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Next">
-									  <span aria-hidden="true">&raquo;</span>
-									</a>
-								  </li>
-								</ul>
-							  </nav>
 						</div>
 					</div>
 				</div>
 			</main>
-			
-
-			
 		</div>
 	</div>
+
+	<!-- Footer -->
 	<footer class="footer">
 		<div class="container-fluid">
-			<div class="row text-muted">
-				<div class="col-6 text-start">
-					<p class="mb-0">
-						<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
-					</p>
-				</div>
-				<div class="col-6 text-end">
-					
-				</div>
-			</div>
+			<p class="mb-0">© AdminKit</p>
 		</div>
-	
 	</footer>
-	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
-</body>
 
+	<script>
+		// Abrir el modal para agregar usuario
+		const openModalBtn = document.getElementById("openModalBtn");
+		const modal = document.getElementById("myModal");
+		const closeModal = document.querySelector(".close");
+		const userForm = document.getElementById("userForm");
+		
+		// Función para abrir el modal en el modo agregar
+		openModalBtn.onclick = () => {
+			modal.style.display = "block";
+			document.getElementById("modalTitle").textContent = "Agregar Usuario"; // Cambiar título
+			document.getElementById("submitBtn").textContent = "Guardar Usuario"; // Cambiar texto del botón
+			userForm.reset(); // Resetear formulario
+			document.getElementById("userId").value = ""; // Limpiar el campo oculto
+		};
+	
+		// Cerrar el modal
+		closeModal.onclick = () => modal.style.display = "none";
+		
+		// Función para llenar el formulario con los datos del perfil a editar
+		async function editUser(id, nombre, correo, rol) {
+			modal.style.display = "block";
+			document.getElementById("modalTitle").textContent = "Editar Usuario"; // Cambiar título
+			document.getElementById("submitBtn").textContent = "Actualizar Usuario"; // Cambiar texto del botón
+	
+			// Rellenar los campos con los datos del usuario a editar
+			document.getElementById("nombre").value = nombre;
+			document.getElementById("correo").value = correo;
+			document.getElementById("rol").value = rol;
+			document.getElementById("userId").value = id; // Asignar el ID al campo oculto
+	
+			// Cambiar el comportamiento del formulario para editar el perfil
+			userForm.onsubmit = async (event) => {
+				event.preventDefault(); // Evitar que el formulario se envíe por defecto
+	
+				const nombre = document.getElementById("nombre").value;
+				const correo = document.getElementById("correo").value;
+				const rol = document.getElementById("rol").value;
+				const contrasena = document.getElementById("contrasena").value;
+	
+				// Validación de campos
+				if (!nombre || !correo || !rol || !contrasena) {
+					Swal.fire("Error", "Por favor, completa todos los campos", "error");
+					return;
+				}
+	
+				try {
+					const response = await fetch(`/api/perfiles/${id}`, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ nombre, correo, rol, contrasena })
+					});
+	
+					if (response.ok) {
+						Swal.fire("Éxito", "Perfil editado correctamente", "success");
+						loadProfiles(); // Recargar la lista de perfiles
+						modal.style.display = "none"; // Cerrar modal
+					} else {
+						const error = await response.json();
+						Swal.fire("Error", error.mensaje || "No se pudo editar el perfil", "error");
+					}
+				} catch (err) {
+					console.error("Error al editar el perfil:", err);
+					Swal.fire("Error", "Hubo un problema al editar el perfil", "error");
+				}
+			};
+		}
+	
+		// Función para agregar un nuevo perfil
+		userForm.addEventListener("submit", async function(event) {
+			event.preventDefault(); // Evitar que el formulario se envíe por defecto
+	
+			const nombre = document.getElementById("nombre").value;
+			const correo = document.getElementById("correo").value;
+			const rol = document.getElementById("rol").value;
+			const contrasena = document.getElementById("contrasena").value;
+			const id = document.getElementById("userId").value;
+	
+			// Validación de campos
+			if (!nombre || !correo || !rol || !contrasena) {
+				Swal.fire("Error", "Por favor, completa todos los campos", "error");
+				return;
+			}
+	
+			try {
+				if (id) {
+					// Si existe el ID, se realiza la edición
+					const response = await fetch(`/api/perfiles/${id}`, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ nombre, correo, rol, contrasena })
+					});
+	
+					if (response.ok) {
+						Swal.fire("Éxito", "Perfil editado correctamente", "success");
+						loadProfiles(); // Recargar la lista de perfiles
+						modal.style.display = "none"; // Cerrar modal
+					} else {
+						const error = await response.json();
+						Swal.fire("Error", error.mensaje || "No se pudo editar el perfil", "error");
+					}
+				} else {
+					// Si no existe el ID, se realiza la creación
+					const response = await fetch("/api/perfiles", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ nombre, correo, rol, contrasena })
+					});
+	
+					if (response.ok) {
+						Swal.fire("Éxito", "Perfil agregado correctamente", "success");
+						loadProfiles(); // Recargar la lista de perfiles
+						modal.style.display = "none"; // Cerrar modal
+					} else {
+						const error = await response.json();
+						Swal.fire("Error", error.mensaje || "No se pudo agregar el perfil", "error");
+					}
+				}
+			} catch (err) {
+				console.error("Error al agregar/editar el perfil:", err);
+				Swal.fire("Error", "Hubo un problema al agregar o editar el perfil", "error");
+			}
+		});
+	
+		// Función para cargar los perfiles
+		async function loadProfiles() {
+			try {
+				const response = await fetch('/api/perfiles');
+				const profiles = await response.json();
+				const profileList = document.getElementById('profileList');
+				profileList.innerHTML = ''; // Limpiar la tabla antes de llenarla
+				profiles.forEach(profile => {
+					profileList.innerHTML += `
+						<tr>
+							<td>${profile.ID}</td>
+							<td>${profile.Nombre}</td>
+							<td>${profile.Correo}</td>
+							<td>${profile.Rol}</td>
+							<td>
+								<button class="btn btn-sm btn-warning" onclick="editUser(${profile.ID}, '${profile.Nombre}', '${profile.Correo}', '${profile.Rol}')">Editar</button>
+								<button class="btn btn-sm btn-danger" onclick="deleteUser(${profile.ID})">Eliminar</button>
+							</td>
+						</tr>
+					`;
+				});
+			} catch (error) {
+				console.error("Error al cargar los perfiles:", error);
+			}
+		}
+		async function deleteUser(id) {
+			Swal.fire({
+				title: "¿Estás seguro?",
+				text: "Esta acción no se puede deshacer.",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Eliminar",
+				cancelButtonText: "Cancelar",
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					try {
+						const response = await fetch(`/api/perfiles/${id}`, {
+							method: "DELETE"
+						});
+	
+						if (response.ok) {
+							Swal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
+							loadProfiles(); // Recargar la lista de perfiles
+						} else {
+							const error = await response.json();
+							Swal.fire("Error", error.mensaje || "No se pudo eliminar el perfil", "error");
+						}
+					} catch (err) {
+						console.error("Error al eliminar el perfil:", err);
+						Swal.fire("Error", "Hubo un problema al eliminar el perfil", "error");
+					}
+				}
+			});
+		}
+		// Cargar perfiles al inicio
+		loadProfiles();
+	</script>
+	
+	
+	
+</body>
 </html>

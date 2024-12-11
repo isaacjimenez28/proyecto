@@ -2,66 +2,62 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
-	
-	<title>CrudHotel</title>
-	
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+
+    <title>CrudHotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
-          <span class="align-middle">Hotel</span>
-        </a>
-		
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="{{ url_for('inicio') }}">
+                    <span class="align-middle">Hotel</span>
+                </a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Paginas
-					</li>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Páginas
+                    </li>
 
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="{{ url_for('inicio') }}">
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ url_for('profile') }}">
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+                        </a>
+                    </li>
 
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
-            </a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
-            </a>
-					</li>
-				</li>
-				<li class="sidebar-item ">
-					<a class="sidebar-link" href="{{ url_for('costo') }}">
-		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-		</a>
-				</li>
-				<li class="sidebar-item">
-					<a class="sidebar-link" href="{{ url_for('cliente') }}">
-		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
-		</a>
-				</li>	
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="{{ url_for('sign') }}">
-              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-            </a>
-					</li>
-					
-		
-			</div>
-		</nav>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-profile">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item ">
+                        <a class="sidebar-link" href="{{ url_for('costo') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ url_for('cliente') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ url_for('sign') }}">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+                        </a>
+                    </li>  
+                </ul>
+            </div>
+        </nav>
 
 		<div class="main">
 			
@@ -71,42 +67,37 @@
           <i class="hamburger align-self-center"></i>
         </a>
 		
-				<!-- Botón para abrir el modal -->				
-					</nav>			
+				<!-- Botón para abrir el modal -->
+				 
+				
+					</nav>
+		
+		
+			
 			<div id="myModal" class="modal" style="display:none;">
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<h2>Reserva</h2>
 			   
 					
-					<form method="POST" action="/crear_reservacion">
+					<form>
 						<div class="mb-3">
-							<label for="cliente" class="form-label">Cliente</label>
-							<select id="cliente" name="cliente" class="form-control">
-								<option value="">Selecciona un cliente</option>
-								{% for cliente in cliente %}
-								<option value="{{ cliente }}">{{ cliente }}</option>
-								{% endfor %}
-							</select>
+							<label for="nombre" class="form-label">Cliente</label>
+							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
 						</div>
 						<div class="mb-3">
 							<label for="costo" class="form-label">Costo</label>
-							<select id="costo" name="costo" class="form-control">
-								<option value="">Selecciona un costo</option>
-								{% for costo in costo %}
-								<option value="{{ costo }}">{{ costo }}</option>
-								{% endfor %}
-							</select>
+							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
 						</div>
 						<div class="mb-3">
-							<label for="fecha_entrada" class="form-label">Fecha de Entrada</label>
-							<input type="date" class="form-control" id="fecha_entrada" name="fecha_entrada" required>
+							<label for="dia" class="form-label">Fecha de Entrada</label>
+							<input type="date" class="form-control" id="dia" name="dia">
 						</div>
 						<div class="mb-3">
-							<label for="fecha_salida" class="form-label">Fecha de Salida</label>
-							<input type="date" class="form-control" id="fecha_salida" name="fecha_salida" required>
+							<label for="dia" class="form-label">Fecha de Salida</label>
+							<input type="date" class="form-control" id="dia" name="dia">
 						</div>
-						<button type="submit" class="btn btn-primary">Crear Reservación</button>
+						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
 				</div>
 			</div>				

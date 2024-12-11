@@ -1,8 +1,6 @@
 from flask import Flask, render_template, jsonify, request,redirect,url_for,session,flash
-from flask_sqlalchemy import SQLAlchemy
-from flask_mysqldb import MySQL
+from flask_sqlalchemy import SQLALchemy
 from config import Config
-#from models import db, Usuario, NivelUsuario
 from werkzeug.security import generate_password_hash,check_password_hash
 import pymysql
 
@@ -150,17 +148,17 @@ def editar_cliente(id_cliente):
     nombre = data.get('nombre')
     numero = data.get('numero')
     correo = data.get('correo')
-    usuario_modificacion = data.get('usuario_modificacion')
-    estatus = data.get('estatus')
+    usuario_modificacion = data.get('usuario_modificacion', 'default_user')  # Valor por defecto
+    estatus = data.get('estatus', 'activo')  # Valor por defecto
 
     # Verifica si los campos requeridos están presentes
-    if not nombre or not numero or not correo or not usuario_modificacion:
+    if not nombre or not numero or not correo:
         return jsonify({'mensaje': 'Faltan datos. Verifica tus datos.'}), 400
 
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("""
+            cursor.execute(""" 
                 UPDATE cliente 
                 SET nombre = %s, numero = %s, correo = %s, 
                     fecha_modificacion = NOW(), usuario_modificacion = %s, estatus = %s
@@ -173,6 +171,7 @@ def editar_cliente(id_cliente):
         return jsonify({'error': str(e)}), 500
     finally:
         conexion.close()
+
 
 # Eliminar cliente
 @app.route('/api/clientes/<int:id_cliente>', methods=['DELETE'])
@@ -257,48 +256,53 @@ def editar_datos(id):
         precio = data.get('precio')
         tipo_habitacion = data.get('tipo_habitacion')
         estatus = data.get('estatus')
-        
-        # Verifica si algún campo está vacío
-        if not precio or not tipo_habitacion or not estatus:
-            return jsonify({'mensaje': 'Falta un dato. Verifica tus datos.'}), 400  
 
-        # Actualizar los datos en la base de datos
+        if not precio or not tipo_habitacion or not estatus:
+            return jsonify({'mensaje': 'Falta un dato. Verifica tus datos.'}), 400
+
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             cursor.execute("""
-                UPDATE costo 
+                UPDATE costo
                 SET precio = %s, tipo_habitacion = %s, fecha_modificacion = NOW(), estatus = %s
-                WHERE id_costo = %s
+                WHERE ID_Costo = %s
             """, (precio, tipo_habitacion, estatus, id))
             conexion.commit()
 
         return jsonify({'mensaje': 'Elemento editado correctamente'}), 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
-    
+        print(f"Error al editar datos: {e}")
+        return jsonify({'error': 'Error interno del servidor', 'detalles': str(e)}), 500
+
     finally:
-        if 'conexion' in locals():  
+        if 'conexion' in locals():
             conexion.close()
 
 
-# Eliminar un elemento
-@app.route('/api/datos/<int:id>', methods=['DELETE'])
-def eliminar_datos(id):
+
+@app.route('/api/costos/<int:id>', methods=['DELETE'])
+def eliminar_costo(id):
     try:
+        # Establecer la conexión con la base de datos
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("DELETE FROM costo WHERE id_costo = %s", (id,))
+            # Ejecutar la consulta DELETE para eliminar el costo
+            cursor.execute("DELETE FROM costo WHERE ID_Costo = %s", (id,))
             conexion.commit()
+
+            # Verificar si se eliminó algún costo
             if cursor.rowcount == 0:
-                return jsonify({'error': 'Elemento no encontrado.'}), 404
-        return jsonify({'mensaje': 'Elemento eliminado correctamente'}), 200
-    except pymysql.err.IntegrityError as e:
-        if e.args[0] == 1451:  # Código de error para restricción de clave foránea
-            return jsonify({'error': 'No se puede eliminar el costo porque está en uso en reservaciones.'}), 400
+                return jsonify({'error': 'Costo no encontrado.'}), 404
+
+        return jsonify({'mensaje': 'Costo eliminado correctamente'}), 200
+
+    except Exception as e:
         return jsonify({'error': str(e)}), 500
+
     finally:
-        conexion.close()
+        if conexion:
+            conexion.close()
 
 #Api de perfiles 
 # Obtener todos los perfiles
@@ -309,11 +313,30 @@ def mostrar_perfiles():
         with conexion.cursor() as cursor:
             cursor.execute("SELECT * FROM perfiles")
             resultado = cursor.fetchall()
-        return jsonify(resultado)
+
+            # Si no se encuentran perfiles, retornamos un mensaje
+            if not resultado:
+                return jsonify({'mensaje': 'No se encontraron perfiles.'}), 404
+
+            perfiles = []
+            for fila in resultado:
+                perfil = {
+                    'ID': fila['ID'],  # Asegúrate de que 'ID' sea el nombre de la columna en la base de datos
+                    'Nombre': fila['nombre'],
+                    'Correo': fila['correo'],
+                    'Rol': fila['rol'],
+                }
+                perfiles.append(perfil)
+
+            return jsonify(perfiles), 200
+
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': f"Error al obtener los perfiles: {str(e)}"}), 500
+
     finally:
-        conexion.close()
+        if conexion:
+            conexion.close()
+
 
 # Buscar perfil por ID
 @app.route('/api/perfiles/<int:id>', methods=['GET'])
@@ -336,61 +359,81 @@ def buscar_perfil(id):
 # Agregar nuevo perfil
 @app.route('/api/perfiles', methods=['POST'])
 def agregar_perfil():
-    data = request.get_json()
-    
-    nombre = data.get('nombre')
-    correo = data.get('correo')
-    rol = data.get('rol')
-    contrasena = data.get('contrasena')
-    
-    # Verifica si algún campo está vacío
-    if not nombre or not correo or not rol or not contrasena:
-        return jsonify({'mensaje': 'Falta un dato. Verifica tus datos.'}), 400
+    try:
+        # Obtener los datos del formulario JSON
+        data = request.get_json()
 
-    # Insertar los datos en la base de datos
-    conexion = obtener_conexion()
-    cursor = conexion.cursor()
-    cursor.execute("""
-        INSERT INTO perfiles (nombre, correo, rol, contrasena, fecha_creacion, fecha_modificacion, usuario_modificacion, estatus)
-        VALUES (%s, %s, %s, %s, NOW(), NOW(), 'admin', 'activo')
-    """, (nombre, correo, rol, contrasena))
-    conexion.commit()
+        # Obtener los valores del JSON
+        nombre = data.get('nombre')
+        correo = data.get('correo')
+        rol = data.get('rol')
+        contrasena = data.get('contrasena')
 
-    return jsonify({'mensaje': 'Perfil agregado correctamente'}), 201
+        # Verificar que no falte ningún campo
+        if not nombre or not correo or not rol or not contrasena:
+            return jsonify({'mensaje': 'Falta un dato. Verifica tus datos.'}), 400
+
+        # Establecer la conexión con la base de datos
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            # Se ajusta la consulta para insertar solo los campos disponibles en la tabla
+            cursor.execute("""
+                INSERT INTO perfiles (nombre, correo, rol, contrasena)
+                VALUES (%s, %s, %s, %s)
+            """, (nombre, correo, rol, contrasena))
+            conexion.commit()
+
+        return jsonify({'mensaje': 'Perfil agregado correctamente'}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        if conexion:
+            conexion.close()
+
 
 # Editar un perfil existente
 @app.route('/api/perfiles/<int:id>', methods=['PUT'])
 def editar_perfil(id):
     try:
+        # Obtener los datos del request
         data = request.get_json()
 
+        # Validar los campos
         nombre = data.get('nombre')
         correo = data.get('correo')
         rol = data.get('rol')
         contrasena = data.get('contrasena')
-        
-        # Verifica si algún campo está vacío
-        if not nombre or not correo or not rol or not contrasena:
-            return jsonify({'mensaje': 'Falta un dato. Verifica tus datos.'}), 400  
 
-        # Actualizar los datos en la base de datos
+        # Verificar si los datos están completos
+        if not nombre or not correo or not rol or not contrasena:
+            return jsonify({'mensaje': 'Faltan datos. Verifica los campos.'}), 400
+
+        # Actualizar el perfil en la base de datos
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             cursor.execute("""
                 UPDATE perfiles 
-                SET nombre = %s, correo = %s, rol = %s, contrasena = %s, fecha_modificacion = NOW(), usuario_modificacion = 'admin', estatus = 'activo'
+                SET nombre = %s, correo = %s, rol = %s, contrasena = %s
                 WHERE id = %s
             """, (nombre, correo, rol, contrasena, id))
             conexion.commit()
+
+            # Verificar si la actualización fue exitosa
+            if cursor.rowcount == 0:
+                return jsonify({'mensaje': 'Perfil no encontrado o no se pudo actualizar.'}), 404
 
         return jsonify({'mensaje': 'Perfil editado correctamente'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
     finally:
-        if 'conexion' in locals():  
+        if 'conexion' in locals():
             conexion.close()
+
+
 
 # Eliminar un perfil
 @app.route('/api/perfiles/<int:id>', methods=['DELETE'])
@@ -409,5 +452,23 @@ def eliminar_perfil(id):
         conexion.close()
         
         
+@app.route('/authenticate',methods=['POST'])
+def authenticate():
+    data=request.json
+    correo =data.get('correo')
+    contrasena= data.get('contrasena')
+    user =Usuario.query.filter_by(correo=correo,estatus=1).first()
+    
+    
+    if user and contrasena:
+        session['usuario']=user.id_usuario
+        return jsonify({'status':'success','message':'Login exitoso'})
+    return jsonify({'status':'error','message':'Credenciales incorrectas'})
+@app.route('/index')
+def dashboard():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    return render_template('index.html')
+    
 if __name__ == '__main__':
     app.run(debug=True)
