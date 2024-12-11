@@ -1,6 +1,10 @@
 from flask import Flask, render_template, jsonify, request,redirect,url_for,session,flash
-from flask_sqlalchemy import SQLALchemy
+from flask_sqlalchemy import SQLAlchemy  
 from config import Config
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3f2d9aa501c77af60b3c5a5ca7e887b57f3a6cd6
 from werkzeug.security import generate_password_hash,check_password_hash
 import pymysql
 
@@ -452,23 +456,42 @@ def eliminar_perfil(id):
         conexion.close()
         
         
-@app.route('/authenticate',methods=['POST'])
+@app.route('/authenticate', methods=['POST'])
 def authenticate():
-    data=request.json
-    correo =data.get('correo')
-    contrasena= data.get('contrasena')
-    user =Usuario.query.filter_by(correo=correo,estatus=1).first()
-    
-    
-    if user and contrasena:
-        session['usuario']=user.id_usuario
-        return jsonify({'status':'success','message':'Login exitoso'})
-    return jsonify({'status':'error','message':'Credenciales incorrectas'})
-@app.route('/index')
-def dashboard():
-    if 'usuario' not in session:
-        return redirect(url_for('login'))
-    return render_template('index.html')
+    data = request.json
+    correo = data.get('correo')
+    contrasena = data.get('contrasena')
+
+    if not correo or not contrasena:
+        return jsonify({'status': 'error', 'message': 'Correo y contraseña son requeridos'}), 400
+
+    # Conectarse a la base de datos usando la función obtener_conexion
+    conn = obtener_conexion()
+    cursor = conn.cursor(dictionary=True)  # Usar un cursor con resultados como diccionario
+
+    # Consultar el usuario
+    cursor.execute('SELECT * FROM perfiles WHERE correo = %s AND estatus = 1', (correo,))
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if user and check_password_hash(user['contrasena'], contrasena):  # Verificar la contraseña hashada
+        # Inicio de sesión exitoso
+        session['usuario'] = user['id']  # Guardar el ID del usuario en la sesión
+        return jsonify({
+            'status': 'success',
+            'message': 'Login exitoso',
+            'usuario': {
+                'id': user['id'],
+                'nombre': user['nombre'],
+                'correo': user['correo'],
+                'rol': user['rol']
+            }
+        })
+    else:
+        # Credenciales incorrectas
+        return jsonify({'status': 'error', 'message': 'Credenciales incorrectas'}), 401
     
 if __name__ == '__main__':
     app.run(debug=True)
