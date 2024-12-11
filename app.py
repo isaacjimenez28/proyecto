@@ -1,7 +1,8 @@
 from flask import Flask, render_template, jsonify, request,redirect,url_for,session,flash
-from flask_sqlalchemy import SQLALchemy
+from flask_sqlalchemy import SQLAlchemy
+from flask_mysqldb import MySQL
 from config import Config
-from models import db, Usuario, NivelUsuario
+#from models import db, Usuario, NivelUsuario
 from werkzeug.security import generate_password_hash,check_password_hash
 import pymysql
 
@@ -36,17 +37,50 @@ def cliente():
 def costo():
     return render_template('costo.html')
 
-#Api de cliente 
-# Configuración de la conexión a la base de datos MySQL
-def obtener_conexion():
-    return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='isa123',
-        db='hotel',
-        cursorclass=pymysql.cursors.DictCursor
-    )
+# Api Inicio reservacion
+@app.route('/formulario', methods=['GET'])
+def formulario():
+    conexion = obtener_conexion()
 
+    # Obtener lista de clientes
+    query_cliente = "SELECT DISTINCT ID_Cliente_01 FROM reservaciones"
+    conexion.execute(query_cliente)
+    cliente = [row[0] for row in conexion.fetchall()]
+
+    # Obtener lista de costos
+    query_costo = "SELECT DISTINCT ID_Costo_01 FROM reservaciones"
+    conexion.execute(query_costo)
+    costo = [row[0] for row in conexion.fetchall()]
+
+    conexion.close()
+    return render_template('formulario.html', cliente=cliente, costo=costo)
+
+@app.route('/reservacion', methods=['POST'])
+def reservacion():
+    ID_cliente_01 = request.form['ID_cliente_01']
+    ID_Costo_01 = request.form['ID_Costo_01']
+    fecha_entrada = request.form['fecha_entrada']
+    fecha_salida = request.form['fecha_salida']
+
+    if not ID_cliente_01 or not ID_Costo_01 or not fecha_entrada or not fecha_salida:
+        return jsonify({'error': 'Todos los campos son obligatorios'}), 400
+
+    try:
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("""
+                INSERT INTO cliente (cliente, costo, fecha_entrada, fecha_salida)
+                VALUES (%s, %s, %s, NOW(), %s)
+            """, (cliente, costo, fecha_entrada, fecha_salida))
+            conexion.commit()
+
+        return jsonify({'mensaje': 'Reservacion agregada correctamente'}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        conexion.close() 
+
+#Api de cliente 
 # Obtener todos los clientes
 @app.route('/api/clientes', methods=['GET'])
 def mostrar_clientes():
@@ -267,11 +301,6 @@ def eliminar_datos(id):
         conexion.close()
 
 #Api de perfiles 
-
-
-
-
-
 # Obtener todos los perfiles
 @app.route('/api/perfiles', methods=['GET'])
 def mostrar_perfiles():
@@ -380,23 +409,5 @@ def eliminar_perfil(id):
         conexion.close()
         
         
-@app.route('/authenticate',methods=['POST'])
-def authenticate():
-    data=request.json
-    correo =data.get('correo')
-    contrasena= data.get('contrasena')
-    user =Usuario.query.filter_by(correo=correo,estatus=1).first()
-    
-    
-    if user and contrasena:
-        session['usuario']=user.id_usuario
-        return jsonify({'status':'success','message':'Login exitoso'})
-    return jsonify({'status':'error','message':'Credenciales incorrectas'})
-@app.route('/index')
-def dashboard():
-    if 'usuario' not in session:
-        return redirect(url_for('login'))
-    return render_template('index.html')
-    
 if __name__ == '__main__':
     app.run(debug=True)

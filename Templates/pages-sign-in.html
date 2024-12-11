@@ -8,44 +8,47 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"> 
-	<!-- Custom CSS -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+	<title>Sign In </title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/sesion.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-	<title>Sign In</title>
+	<!-- Cargar SweetAlert CDN aquí -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 	<main class="d-flex w-100">
 		<div class="container d-flex flex-column">
-			<div class="row vh-100 align-items-center justify-content-center">
-				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
-					<div class="card">
-						<div class="card-body">
-							<div class="text-center mt-4">
-								<h1 class="h2">¡Hola, bienvenidos!</h1>
-								<p class="text-muted">Por favor, inicia sesión para continuar</p>
-							</div>
-							<div class="m-sm-4">
-								<form>
-									<div class="mb-3">
-										<label class="form-label">Email</label>
-										<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+			<div class="row vh-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">
+					
+
+						<div class="card">
+							<div class="card-body">
+								<div class="m-sm-3">
+									<div class="text-center mt-4">
+										<h1 class="h2">¡Bienvenido!</h1>
 									</div>
-									<div class="mb-3">
-										<label class="form-label">Password</label>
-										<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
-									</div>
-									<div class="form-check">
-										<input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
-										<label class="form-check-label" for="customControlInline">Remember me</label>
-									</div>
-									<div class="d-grid gap-2 mt-3">
-										<a href="{{ url_for('inicio') }}" class="btn btn-lg btn-primary">Sign in</a>
-									</div>
-								</form>
+									<form id="loginForm">
+										<div class="mb-3">
+											<label class="form-label">Email</label>
+											<input id="email" class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" required />
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Password</label>
+											<input id="password" class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" required />
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -54,59 +57,60 @@
 		</div>
 	</main>
 
-	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+	<!-- JavaScript para capturar el formulario -->
+	<script>
+		document.getElementById("loginForm").addEventListener("submit", function(event) {
+			event.preventDefault(); // Evitar que se recargue la página
 
-	$("#form-login").on("submit", function (e) {
-		e.preventDefault();
-		Swal.fire({
-			title: "Cargando...",
-			text: "Validando credencial",
-			icon: "info",
-			allowOutsideClick: false,
-			showConfirmButton: false,
-			didOpen: () => {
-				Swal.showLoading();
-			},
-		});
+			const correo = document.getElementById("email").value;
+			const contrasena = document.getElementById("password").value;
 
-		$.ajax({
-			url: "/authenticate",
-			method: "POST",
-			contentType: "application/json",
-			data: JSON.stringify({
-				Email: $("#Email").val(),
-				Password: $("#Password").val(),
-			}),
-			success: function (response) {
-				Swal.close(),
-				if (response.status === "success") {
+			// Enviar los datos al backend usando fetch
+			fetch("/authenticate", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ correo: correo, contrasena: contrasena })
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === "success") {
+					// Mostrar SweetAlert si el inicio de sesión es exitoso
 					Swal.fire({
-						title: "Bienvenido Usuario",
-						text: "Inicio de sesion exitoso",
+						title: "¡Bienvenido!",
+						text: data.message,
 						icon: "success",
-						timer: 1500,
-						showConfirmButton: false,
-					}).then(() => {
-                      window.location.href = "/index";
-					}),
+						confirmButtonText: "Ir al Dashboard"
+					}).then((result) => {
+						if (result.isConfirmed) {
+							// Redirigir al dashboard si el login es exitoso
+							window.location.href = "/index"; // Asegúrate de que "/index" sea la ruta de tu dashboard
+						}
+					});
 				} else {
+					// Mostrar SweetAlert si las credenciales son incorrectas
 					Swal.fire({
 						title: "Error",
-						text: response.message,
+						text: data.message,
 						icon: "error",
-					}),
+						confirmButtonText: "Reintentar"
+					});
 				}
-			},
-			error: function () {
-				Swal.close();
+			})
+			.catch(error => {
+				// Mostrar un error en caso de que haya un problema con la conexión
 				Swal.fire({
 					title: "Error",
-					text: "Ocurrio un problema con la solicitud.",
-					icon: "error"
+					text: "Hubo un problema con la conexión.",
+					icon: "error",
+					confirmButtonText: "Cerrar"
 				});
-			},
+			});
 		});
-	});
+	</script>
+
+	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 
 </html>
