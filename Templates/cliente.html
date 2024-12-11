@@ -8,7 +8,7 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	
@@ -17,6 +17,9 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- SweetAlert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -24,67 +27,46 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
-          <span class="align-middle">Hotel</span>
-        </a>
+					<span class="align-middle">Hotel</span>
+				</a>
 
 				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Paginas
-					</li>
+					<li class="sidebar-header">Páginas</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('inicio') }}">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
-            </a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+						</a>
 					</li>
-					<li class="sidebar-item ">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('profile') }}">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
-            </a>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
+						</a>
 					</li>
-                    <li class="sidebar-item ">
+                    <li class="sidebar-item">
 						<a class="sidebar-link" href="{{ url_for('costo') }}">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-            </a>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+						</a>
 					</li>
-				</li>
-				<li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ url_for('cliente') }}">
-          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Cliente</span>
-        </a>
-                </li>
-				<li class="sidebar-item">
-					<a class="sidebar-link" href="{{ url_for('sign') }}">
-		  <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-		</a>
-				</li>
-
-
-
-
-				
+					<li class="sidebar-item active">
+						<a class="sidebar-link" href="{{ url_for('cliente') }}">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Cliente</span>
+						</a>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{{ url_for('sign') }}">
+							<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</nav>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<h1></h1>
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							
-							
-						<li class="nav-item dropdown">
-							
-							
-						</li>
-						
-					</ul>
-				</div>
+					<i class="hamburger align-self-center"></i>
+				</a>
 			</nav>
 
 			<main class="content">
@@ -92,44 +74,36 @@
 					<div class="mb-3 d-flex justify-content-between align-items-center">
 						<h1 class="h3">Cliente</h1>
 						<div class="d-flex justify-content-end w-100">
-							<button id="openModalBtn" class="btn btn-outline-primary">Agrega Nuevo Cliente</button>
+							<button id="openModalBtn" class="btn btn-outline-primary">Agregar Nuevo Cliente</button>
 						</div>
-				 
-				
-					</nav>
-		
-		
-			
-			<div id="myModal" class="modal" style="display:none;">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<h2>Cliente</h2>
-			   
-					
-					<form>
-						<div class="mb-3">
-							<label for="nombre" class="form-label">Nombre</label>
-							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
-						</div>
-						<div class="mb-3">
-							<label for="reservacion" class="form-label">Correo Electronico</label>
-							<input type="text" class="form-control" id="reservacion" name="reservacion" placeholder="Ingresa tu reservación">
-						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">Numero de telefono</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
-						
-						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</form>
-				</div>
-			</div>				
 					</div>
-			
+
+					<!-- Modal para agregar y editar -->
+					<div id="myModal" class="modal" style="display:none;">
+						<div class="modal-content">
+							<span class="close">&times;</span>
+							<h2 id="modalTitle">Agregar Cliente</h2>
+							<form id="formCliente">
+								<div class="mb-3">
+									<label for="nombre" class="form-label">Nombre</label>
+									<input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingresa tu nombre">
+								</div>
+								<div class="mb-3">
+									<label for="correo" class="form-label">Correo Electrónico</label>
+									<input type="email" class="form-control" id="correo" name="correo" required placeholder="Ingresa tu correo">
+								</div>
+								<div class="mb-3">
+									<label for="numero" class="form-label">Número de Teléfono</label>
+									<input type="text" class="form-control" id="numero" name="numero" required placeholder="Ingresa tu número">
+								</div>
+								<button type="submit" class="btn btn-primary">Enviar</button>
+							</form>
+						</div>
+					</div>
+
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title mb-0">Listado de Perfiles</h5>
+							<h5 class="card-title mb-0">Listado de Clientes</h5>
 						</div>
 						<div class="card-body">
 							<table class="table table-striped">
@@ -138,91 +112,159 @@
 										<th>#</th>
 										<th>Nombre</th>
 										<th>Correo Electrónico</th>
-										<th>Numero de telefono</th>
+										<th>Teléfono</th>
 										<th>Acciones</th>
-
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>isaac jimenex</td>
-										<td>isaacjimenez@gmail.com.com</td>
-										
-										<td>**********</td>
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Ana Gómez</td>
-										<td>ana.gomez@example.com</td>
-										
-										<td>**********</td>
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Danna rosas campos</td>
-										<td>dannarosas@gmail.com</td>
-										
-										<td>**********</td>
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-								</tbody>
-								
+								<tbody id="tablaClientes"></tbody>
 							</table>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination">
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Previous">
-									  <span aria-hidden="true">&laquo;</span>
-									</a>
-								  </li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Next">
-									  <span aria-hidden="true">&raquo;</span>
-									</a>
-								  </li>
-								</ul>
-							  </nav>
 						</div>
 					</div>
 				</div>
 			</main>
-			
-
-			
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="container-fluid">
-			<div class="row text-muted">
-				<div class="col-6 text-start">
-					<p class="mb-0">
-						<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
-					</p>
-				</div>
-				<div class="col-6 text-end">
-					
-				</div>
-			</div>
-		</div>
-	
-	</footer>
-	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
-</body>
 
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const openModalBtn = document.getElementById("openModalBtn");
+			const modal = document.getElementById("myModal");
+			const closeModal = document.querySelector(".close");
+			const formCliente = document.getElementById("formCliente");
+			const tablaClientes = document.getElementById("tablaClientes");
+			let editMode = false; // Indica si estamos editando
+			let editId = null; // ID del cliente a editar
+	
+			// Abrir y cerrar modal
+			openModalBtn.addEventListener("click", () => {
+				resetModal();
+				modal.style.display = "block";
+			});
+			closeModal.addEventListener("click", () => {
+				resetModal();
+				modal.style.display = "none";
+			});
+	
+			// Resetear modal
+			function resetModal() {
+				formCliente.reset();
+				editMode = false;
+				editId = null;
+			}
+	
+			// Cargar clientes
+			async function cargarClientes() {
+				tablaClientes.innerHTML = "<tr><td colspan='5'>Cargando...</td></tr>";
+				try {
+					const response = await fetch("/api/clientes");
+					if (!response.ok) throw new Error("Error al cargar los clientes");
+					const clientes = await response.json();
+	
+					console.log("Datos recibidos:", clientes);  // Agrega este log para depurar
+	
+					if (clientes.length === 0) {
+						tablaClientes.innerHTML = "<tr><td colspan='5'>No hay clientes registrados.</td></tr>";
+						return;
+					}
+	
+					tablaClientes.innerHTML = "";
+					clientes.forEach((cliente, index) => {
+						tablaClientes.innerHTML += `
+							<tr>
+								<td>${index + 1}</td>
+								<td>${cliente.Nombre || 'Sin nombre'}</td>
+								<td>${cliente.Correo || 'Sin correo'}</td>
+								<td>${cliente.Numero || 'Sin número'}</td>
+								<td>
+									<button class="btn btn-warning btn-sm" onclick="editarCliente(${cliente.ID_Cliente})">Editar</button>
+									<button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cliente.ID_Cliente})">Eliminar</button>
+								</td>
+							</tr>
+						`;
+					});
+				} catch (error) {
+					Swal.fire("Error", error.message, "error");
+				}
+			}
+	
+			// Enviar formulario (Agregar o Editar)
+			formCliente.addEventListener("submit", async (e) => {
+				e.preventDefault();
+				const nombre = document.getElementById("nombre").value;
+				const correo = document.getElementById("correo").value;
+				const numero = document.getElementById("numero").value;
+	
+				const clienteData = { nombre, correo, numero };
+				const url = editMode ? `/api/clientes/${editId}` : "/api/clientes";
+				const method = editMode ? "PUT" : "POST";
+	
+				const response = await fetch(url, {
+					method,
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(clienteData),
+				});
+	
+				if (response.ok) {
+					Swal.fire("Éxito", editMode ? "Cliente actualizado correctamente" : "Cliente agregado correctamente", "success");
+					resetModal();
+					modal.style.display = "none";
+					cargarClientes();
+				} else {
+					Swal.fire("Error", "No se pudo completar la operación", "error");
+				}
+			});
+	
+			// Función para editar cliente
+			window.editarCliente = async (id) => {
+				try {
+					const response = await fetch(`/api/clientes/${id}`);
+					if (!response.ok) throw new Error("Cliente no encontrado");
+					const cliente = await response.json();
+	
+					// Cargar datos en la modal
+					document.getElementById("nombre").value = cliente.Nombre || "";
+					document.getElementById("correo").value = cliente.Correo || "";
+					document.getElementById("numero").value = cliente.Numero || "";
+	
+					// Configurar modo edición
+					editMode = true;
+					editId = id;
+	
+					// Mostrar modal
+					modal.style.display = "block";
+				} catch (error) {
+					Swal.fire("Error", error.message, "error");
+				}
+			};
+	
+			// Función para eliminar cliente
+			window.eliminarCliente = async (id) => {
+				const confirmDelete = await Swal.fire({
+					title: "¿Estás seguro?",
+					text: "Esta acción no se puede deshacer",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonText: "Eliminar",
+				});
+	
+				if (!confirmDelete.isConfirmed) return;
+	
+				const response = await fetch(`/api/clientes/${id}`, {
+					method: "DELETE",
+				});
+	
+				if (response.ok) {
+					Swal.fire("Éxito", "Cliente eliminado correctamente", "success");
+					cargarClientes();
+				} else {
+					Swal.fire("Error", "No se pudo eliminar el cliente", "error");
+				}
+			};
+	
+			// Cargar clientes al cargar la página
+			cargarClientes();
+		});
+	</script>
+	
+</body>
 </html>

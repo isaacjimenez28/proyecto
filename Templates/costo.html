@@ -2,221 +2,126 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
-
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	
-	<title>CrudHotel</title>
-
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>CrudHotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
-          <span class="align-middle">Hotel</span>
-        </a>
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="{{ url_for('inicio') }}">
+                    <span class="align-middle">Hotel</span>
+                </a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Paginas
-					</li>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Páginas
+                    </li>
+                    <li class="sidebar-item ">
+                        <a class="sidebar-link" href="{{ url_for('profile') }}">
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+                        </a>
+                    </li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="{{ url_for('inicio') }}">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
-            </a>
-					</li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-profile">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ url_for('costo') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ url_for('cliente') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ url_for('sign') }}">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-					<li class="sidebar-item ">
-						<a class="sidebar-link" href="{{ url_for('profile') }}">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
-            </a>
-					</li>
-				</li>
-			</li>
-            <li class="sidebar-item active">
-                <a class="sidebar-link" href="{{ url_for('costo') }}">
-      <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-    </a>
-            </li>
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="{{ url_for('cliente') }}">
-	  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Cliente</span>
-	</a>
-			</li>		
-			
-				<li class="sidebar-item">
-					<a class="sidebar-link" href="{{ url_for('sign') }}">
-		  <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-		</a>
-				</li>
-		
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+            </nav>
 
+            <main class="content">
+                <div class="container-fluid p-0">
+                    <div class="d-flex justify-content-end w-100">
+                        <button id="openModalBtn" class="btn btn-outline-primary">Nuevo Costo</button>
+                    </div>
+                    <h1 class="h3 mb-3"><strong>Lista</strong> de Costos</h1>
 
-
-				
-			</div>
-		</nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<h1></h1>
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							
-							
-						<li class="nav-item dropdown">
-							
-							
-						</li>
-						
-					</ul>
-				</div>
-			</nav>
-
-			<main class="content">
-				<div class="container-fluid p-0">
-					<div class="mb-3 d-flex justify-content-between align-items-center">
-						<h1 class="h3">Perfiles</h1>
-						<div class="d-flex justify-content-end w-100">
-							<button id="openModalBtn" class="btn btn-outline-primary">Nuevo costo</button>
-						</div>
-				 
-				
-					</nav>
-		
-		
-			
-			<div id="myModal" class="modal" style="display:none;">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<h2>Costo</h2>
-			   
-					
-					<form id="formCosto">
-						<div class="mb-3">
-							<label for="precio" class="form-label">Precio</label>
-							<input type="text" class="form-control" id="precio" name="precio" placeholder="Ingresa el precio">
-						</div>
-						<div class="mb-3">
-							<label for="tipo_habitacion" class="form-label">Tipo de habitación</label>
-							<input type="text" class="form-control" id="tipo_habitacion" name="tipo_habitacion" placeholder="Ingresa el tipo de habitación">
-						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</form>
-					
-				</div>
-			</div>				
-					</div>
-			
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title mb-0">Listado de costos</h5>
-						</div>
-						<div class="card-body">
-							<table class="table table-striped">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Listado de Costos</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped" id="costoTable">
 								<thead>
 									<tr>
 										<th>#</th>
 										<th>Precio</th>
-										<th>Tipo de habitacion</th>
-										
-
+										<th>Tipo de habitación</th>
+										<th>Acciones</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>isaac jimenex</td>
-										<td>isaacjimenez@gmail.com.com</td>
-										
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Ana Gómez</td>
-										<td>ana.gomez@example.com</td>
-										
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Danna rosas campos</td>
-										<td>dannarosas@gmail.com</td>
-										
-										<td>
-											<button class="btn btn-sm btn-warning">Editar</button>
-											<button class="btn btn-sm btn-danger">Eliminar</button>
-										</td>
-									</tr>
+								<tbody id="costosBody">
+									<!-- Los costos se insertarán aquí mediante JavaScript -->
 								</tbody>
-								
 							</table>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination">
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Previous">
-									  <span aria-hidden="true">&laquo;</span>
-									</a>
-								  </li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Next">
-									  <span aria-hidden="true">&raquo;</span>
-									</a>
-								  </li>
-								</ul>
-							  </nav>
-						</div>
-					</div>
-				</div>
-			</main>
-			
+							
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
 
-			
+    <!-- Modal para agregar costo -->
+    <div id="myModal" class="modal" style="display:none;">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Agregar Costo</h2>
+			<form id="formCosto">
+				<div class="mb-3">
+					<label for="precio" class="form-label">Precio</label>
+					<input type="text" class="form-control" id="precio" name="precio" placeholder="Ingresa el precio" required>
+				</div>
+				<div class="mb-3">
+					<label for="tipo_habitacion" class="form-label">Tipo de habitación</label>
+					<input type="text" class="form-control" id="tipo_habitacion" name="tipo_habitacion" placeholder="Ingresa el tipo de habitación" required>
+				</div>
+				<button type="submit" class="btn btn-primary">Registrar</button>
+			</form>
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="container-fluid">
-			<div class="row text-muted">
-				<div class="col-6 text-start">
-					<p class="mb-0">
-						<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
-					</p>
-				</div>
-				<div class="col-6 text-end">
-					
-				</div>
-			</div>
-		</div>
-	
-	</footer>
-	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+
+
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 </body>
 
 </html>

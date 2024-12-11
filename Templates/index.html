@@ -2,230 +2,168 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"> 
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
-	
-	<title>CrudHotel</title>
-	
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+
+    <title>CrudHotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="{{ url_for('inicio') }}">
-          <span class="align-middle">Hotel</span>
-        </a>
-		
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="{{ url_for('inicio') }}">
+                    <span class="align-middle">Hotel</span>
+                </a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Paginas
-					</li>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Páginas
+                    </li>
 
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="{{ url_for('inicio') }}">
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ url_for('profile') }}">
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+                        </a>
+                    </li>
 
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
-            </a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
-            </a>
-					</li>
-				</li>
-				<li class="sidebar-item ">
-					<a class="sidebar-link" href="{{ url_for('costo') }}">
-		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
-		</a>
-				</li>
-				<li class="sidebar-item">
-					<a class="sidebar-link" href="{{ url_for('cliente') }}">
-		  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
-		</a>
-				</li>	
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="{{ url_for('sign') }}">
-              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-            </a>
-					</li>
-					
-		
-			</div>
-		</nav>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-profile">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Perfil</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item ">
+                        <a class="sidebar-link" href="{{ url_for('costo') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Costo</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ url_for('cliente') }}">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ url_for('sign') }}">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+                        </a>
+                    </li>  
+                </ul>
+            </div>
+        </nav>
 
-		<div class="main">
-			
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-					
-          <i class="hamburger align-self-center"></i>
-        </a>
-		
-				<!-- Botón para abrir el modal -->
-				 
-				
-					</nav>
-		
-		
-			
-			<div id="myModal" class="modal" style="display:none;">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<h2>Reserva</h2>
-			   
-					
-					<form>
-						<div class="mb-3">
-							<label for="nombre" class="form-label">Cliente</label>
-							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre">
-						</div>
-						<div class="mb-3">
-							<label for="costo" class="form-label">Costo</label>
-							<input type="text" class="form-control" id="costo" name="costo" placeholder="Ingresa el costo">
-						</div>
-						<div class="mb-3">
-							<label for="dia" class="form-label">Fecha de Entrada</label>
-							<input type="date" class="form-control" id="dia" name="dia">
-						</div>
-						<div class="mb-3">
-							<label for="dia" class="form-label">Fecha de Salida</label>
-							<input type="date" class="form-control" id="dia" name="dia">
-						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</form>
-				</div>
-			</div>				
-		</body>		
-		</html>				
-			</nav>
-			
-			<main class="content">
-				
-				<div class="container-fluid p-0">
-					<div class="d-flex justify-content-end w-100">
-						<button id="openModalBtn" class="btn btn-outline-primary">Registrar</button>
-					</div> 
-					<h1 class="h3">Reservaciones</h1>
-					<div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
-							<div class="w-100">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="card">
-											
-										</div>
-									
-									</div>
-								</div>
-							</div>
-						</div>
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+            </nav>
 
-						
-					</div>
-					<div class="row">
-						
-						
-						</div>
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-							<div class="card flex-fill">
-								
-							</div>
-						</div>
-					</div>
-					
-						
-							
-					<div class="card">
-									<div class="card-body">
-										<table class="table table-striped">
-											<thead>
-												<tr>
-													<th >Cliente</th>
-													<th >Costo</th>
-													<th >Fecha de Entrada</th>
-													<th >Fecha de Salida</th>
-													<th >Acciones</th>
-												  </tr>
-												</thead>
-												<tbody>
-												  <tr>
-													<th >Mark</th>
-													<td>$400</td>
-													<td>12/11/2025</td>
-													<td>12/11/2025</td>
-													<td>
-														<button type="button" class="btn btn-outline-warning">Editar</button>
-														<button type="button" class="btn btn-outline-danger">Borrar</button>
-													  </td>
-												  </tr>
-												  <tr>
-													<th >Jacob</th>
-													<td>$390</td>
-													<td>9/10/2025</td>
-													<td>12/11/2025</td>
-													<td>
-														<button type="button" class="btn btn-outline-warning">Editar</button>
-														<button type="button" class="btn btn-outline-danger">Borrar</button>
-													  </td>
-												  </tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+            <main class="content">
+                <div class="container-fluid p-0">
+                    <div class="d-flex justify-content-end w-100">
+                        <button id="openModalBtn" class="btn btn-outline-primary">Registrar</button>
+                    </div> 
+                    <h1 class="h3 mb-3"><strong>Lista</strong> Reservaciones</h1>
 
-							
-						
-					
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-						  <li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-							  <span aria-hidden="true">&laquo;</span>
-							</a>
-						  </li>
-						  <li class="page-item"><a class="page-link" href="#">1</a></li>
-						  <li class="page-item"><a class="page-link" href="#">2</a></li>
-						  <li class="page-item"><a class="page-link" href="#">3</a></li>
-						  <li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-							  <span aria-hidden="true">&raquo;</span>
-							</a>
-						  </li>
-						</ul>
-					  </nav>
-			</main>
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
-							</p>
-						</div>
-						<div class="col-6 text-end">
-							
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-	
-		
-	</div>
-	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
-	
-	
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Reservaciones</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped" id="reservacionTable">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Reservación</th>
+                                        <th>Costo</th>
+                                        <th>Fecha Entrada</th>
+                                        <th>Fecha Salida</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reservacionesBody">
+                                    <!-- Las reservaciones se insertarán aquí mediante JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Llamada a la API para obtener las reservaciones
+        fetch('/api/reservaciones')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('reservacionesBody');
+                data.forEach(reservacion => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${reservacion.nombre_cliente || 'No disponible'}</td>
+                        <td>${reservacion.ID_reservacion || 'No disponible'}</td>
+                        <td>${reservacion.costo || 'No disponible'}</td>
+                        <td>${reservacion.fecha_entrada || 'No disponible'}</td>
+                        <td>${reservacion.fecha_salida || 'No disponible'}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-warning" onclick="editarReservacion(${reservacion.ID_reservacion})">Editar</button>
+                            <button type="button" class="btn btn-outline-danger" onclick="eliminarReservacion(${reservacion.ID_reservacion})">Borrar</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching reservaciones:', error));
+
+        // Función para editar una reservación
+        function editarReservacion(id) {
+            // Puedes agregar una lógica aquí para editar la reservación
+            alert('Editar Reservación ID: ' + id);
+        }
+
+        // Función para eliminar una reservación
+        function eliminarReservacion(id) {
+            // Lógica de eliminación
+            fetch(`/api/reservaciones/${id}`, { method: "DELETE" })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.mensaje) {
+                        alert('Reservación eliminada correctamente');
+                        location.reload(); // Recargar la página para actualizar los datos
+                    }
+                })
+                .catch(error => console.error('Error al eliminar la reservación:', error));
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 </body>
 </html>
